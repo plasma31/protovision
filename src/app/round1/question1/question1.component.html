@@ -1,0 +1,20 @@
+<!DOCTYPE html> 
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+    </head> 
+    <body style="background-color:black; height: 750px;">
+        <div class="row">
+            <div class="column" >
+                <video width="600" id="video" controls>
+                    <source src="assets/img/1(a).mp4" type="video/mp4">
+                </video>
+            </div>
+            <div class="column">
+                <font color="white"><h2>Solve the simple question in the video</h2>
+                <p>Answer: <input type="number" id="answer">
+                <button type="submit" class="button" (click)="validate()" ><b>Submit</b></button></p></font>
+            </div>
+        </div> 
+    </body> 
+</html>

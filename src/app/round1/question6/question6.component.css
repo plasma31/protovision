@@ -1,0 +1,310 @@
+
+body {
+    margin: 25px;
+    text-align: center;
+    background: black;
+  }
+  
+  h1 {
+    color: #26ABDE;
+  }
+  
+  .virtual-keyboard .row {
+    text-align: center;
+    margin: 0 0 15px;
+  }
+  .virtual-keyboard .row.spacebar input {
+    padding: 10px 150px;
+  }
+  .virtual-keyboard input[type='button'] {
+    padding: 10px 20px;
+    border-radius: 30px;
+    border: 3px solid #202C2B;
+    color:transparent;
+    text-transform: uppercase;
+  }
+  .virtual-keyboard input[type='button'].shift-activated {
+    background: red;
+  }
+  .virtual-keyboard input[type='button'].delete, .virtual-keyboard input[type='button'].shift {
+    text-transform: none;
+  }
+  
+  .output {
+    margin: 15px;
+  }
+  .output input {
+    color: white;
+    background: black;
+    border: 0px;
+    line-height: 2.2em;
+    text-align: center;
+    font-size: 2em;
+    width: 100%;
+  }
+  .output input:focus {
+    outline: none;
+    border: 0px;
+  }
+  .output ::-webkit-input-placeholder {
+    color: white;
+    text-align: center;
+    font-size: 1em;
+  }
+  .row {
+      background: black;
+  }
+  .column {
+    float: left;
+    width: 50%;
+    background: black;
+    /* padding: 100px; */
+    /* height: 350px; */
+}
+button {
+    background-color: yellow;
+    border: none;
+    color: black;
+    padding: 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 8px;
+}
+button:hover{
+    background-color: darkgoldenrod;
+}
+
+#em1 {
+    background: url("../../../assets/img/em1.png");
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+}
+#em2 {
+    background: url("../../../assets/img/em2.png");
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;   
+}
+#em3 {
+    background: url("../../../assets/img/em3.png");
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+    
+}
+#em4 {
+    background: url("../../../assets/img/em4.png");
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+}
+#em5 {
+    background: url("../../../assets/img/em5.png");
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+}
+#em6 {
+    background: url("../../../assets/img/em6.png");
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+}
+#em7 {
+    background: url("../../../assets/img/em7.png");
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+}
+#em8 {
+    background: url("../../../assets/img/em8.png");
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+}
+#em9 {
+    background: url("../../../assets/img/em9.png");
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+}
+#em0 {
+    background: url("../../../assets/img/em0.png");
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+}
+#emA {
+    background: url("../../../assets/img/emA.png");
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+}
+#emB {
+    background: url("../../../assets/img/emB.png");
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+}
+#emC {
+    background: url("../../../assets/img/emC.png");
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+}
+#emD {
+    background: url("../../../assets/img/emD.png");
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+}
+#emE {
+    background: url("../../../assets/img/emE.png");
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+}
+#emF {
+    background: url("../../../assets/img/emF.png");
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+}
+#emG {
+    background: url("../../../assets/img/emG.png");
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+}
+#emH {
+    background: url("../../../assets/img/emH.png");
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+}
+#emI {
+    background: url("../../../assets/img/emI.png");
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+}
+#emJ {
+    background: url("../../../assets/img/emJ.png");
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+}
+#emK {
+    background: url("../../../assets/img/emK.png");
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+}
+#emL {
+    background: url("../../../assets/img/emL.png");
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+}
+#emM {
+    background: url("../../../assets/img/emM.png");
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+}
+#emN {
+    background: url("../../../assets/img/emN.png");
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+}
+#emO {
+    background: url("../../../assets/img/emO.png");
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+}
+#emP {
+    background: url("../../../assets/img/emP.png");
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+}
+#emQ {
+    background: url("../../../assets/img/emQ.png");
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+}
+#emR {
+    background: url("../../../assets/img/emR.png");
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+}
+#emS {
+    background: url("../../../assets/img/emS.png");
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+}
+#emT {
+    background: url("../../../assets/img/emT.png");
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+}
+#emU {
+    background: url("../../../assets/img/emU.png");
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+}
+#emV {
+    background: url("../../../assets/img/emV.png");
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+}
+#emW {
+    background: url("../../../assets/img/emW.png");
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+}
+#emX {
+    background: url("../../../assets/img/emX.png");
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+}
+#emY {
+    background: url("../../../assets/img/emY.png");
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+}
+#emZ {
+    background: url("../../../assets/img/emZ.png");
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+}
+#emDelete {
+    background: url("../../../assets/img/emDelete.png");
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+}
+#emSpace {
+    background: url("../../../assets/img/emSpace.png");
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+}
+

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Typing test</title>
+</head>
+
+<body style="height: 720px;">
+    <header class="masthead">
+        <h1>Trouble Typer</h1>
+    </header>
+    <main class="main">
+            <div style="padding-left: 600px;"> 
+                    <font color="white"> Time Left - </font> 
+                    <font color="white">{{currentValue}}</font>  
+            </div>
+        <article class="intro">
+            <p>Your goal is to duplicate the provided text in reverse format letter by letter. Timer starts when you starts typing. Good Luck!</p>
+        </article><!-- .intro -->
+        <section class="test-area">
+            <div style="text-align: center;">
+                    <font color="aquamarine"><b><label >{{originalText}}</label></b></font>
+            </div><!-- #origin-text -->
+
+            <div class="test-wrapper" [formGroup]="eventForm">
+                <textarea formControlName="textArea" id="test-area" name="textarea" rows="6" placeholder="The clock starts when you start typing."></textarea>
+            </div><!-- .test-wrapper -->
+            <div style="padding-left: 190px;">
+                    <button type ="submit"  (click)="submit()" id="submit">Submit</button>
+            </div>
+        </section><!-- .test-area -->
+    </main>
+
+</body>
+</html>
