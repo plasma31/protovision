@@ -2,7 +2,7 @@
   "name": "protovision",
   "version": "0.0.0",
   "scripts": {
-    "dev":"lite-server",
+    "dev": "lite-server",
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
