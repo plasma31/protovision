@@ -149,30 +149,20 @@ _keystroke("upper"); // init keystrokes
         this.currparticipant=this.protoparticipant[i].data;
       }
     }
-    let obj:any={};
-      obj.firstplayer=this.currparticipant.firstplayer;
-      obj.secondplayer=this.currparticipant.secondplayer;
-      obj.number=this.currparticipant.number;
-      obj.email=this.currparticipant.email;
-    if(this.check===true){
-      let score=5;
-      obj.score=this.currparticipant.score+score;
-      console.log(obj);
-      this.eveSer.setScore(this.id,obj);
-    }else{
-      let score=0;
-      obj.score=this.currparticipant.score+score;
-      console.log(obj);
-      this.eveSer.setScore(this.id,obj);    
+    let obj:any={'score':0};
+    if (this.check === true) {
+       obj.score = 5;
+    } else {
+      obj.score = 0;
     }
-    this.router.navigate(['/round1/question7'],{
-      queryParams:{
-        id:this.id,
-        firstplayer:obj.firstplayer,
-        secondplayer:obj.secondplayer,
-        number:obj.number,
-        email:obj.email,
-        score:obj.score
+      obj.score = this.currparticipant.score + obj.score;
+      console.log(obj.score);
+      this.eveSer.addScore(this.id, obj).then(success=>{
+        console.log(success);
+      }).catch(error=>{console.log(error)});
+    this.router.navigate(["/round1/question6"], {
+      queryParams: {
+        id: this.id
       }
     });
   }

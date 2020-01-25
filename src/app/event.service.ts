@@ -10,6 +10,8 @@ export interface Event {
 })
 export class EventService {
   private users: Observable<Event[]>;
+  private attended: Observable<any[]>;
+
   constructor(private afd: AngularFirestore) { }
   // Admin
   setAdmin(id, data) {
@@ -28,8 +30,11 @@ export class EventService {
     return this.users;
   }
   //SetScore
-  setScore(id,data){
-    this.afd.collection('ScoreProtovision').doc(id).set(data);
+  setScoreDetails(id,data){
+    return this.afd.collection('ScoreProtovision').doc(id).set(data);
+  }
+  addScore(id,data){
+    return this.afd.collection('ScoreProtovision').doc(id).update(data);
   }
   getScore(){
     this.users = this.afd.collection('ScoreProtovision').snapshotChanges().pipe(
@@ -45,19 +50,19 @@ export class EventService {
   }
   // ScanCheck
   scan(event,id, data) {
-    this.afd.collection('Attended '+event).doc(id).set(data);
+    return this.afd.collection('Attended '+event).doc(id).set(data);
   }
   getAttended(id) {
-    this.users = this.afd.collection(id).snapshotChanges().pipe(
+    this.attended = this.afd.collection(id).snapshotChanges().pipe(
       map(actions => {
         return actions.map(a => {
-          const data = a.payload.doc.data();
-          const id = a.payload.doc.id;
-          return { id, data };
+          var data :any = a.payload.doc.data();
+          data.id = a.payload.doc.id;
+          return {data};
         });
       })
     );
-    return this.users;
+    return this.attended;
   }
   // Amount
   addAmount(id, data) {

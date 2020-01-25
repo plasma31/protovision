@@ -1,85 +1,20 @@
 <!DOCTYPE html>
-<html lang="en-US">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-</head>
-
-<body style="background:black; height: 720px;" >
+<html>
+  <body style="background-color:#0b1c12; height: 730px;">
     <div class="row">
-        <div class="column">
-            <font color="white"><b><p style="font-size: 20px;">Type the following statement using emoji keyboard</p></b></font>
-            <font color="yellow"><b><p p style="font-size: 30px;">{{originaltext}}</p></b></font>
-            <div class="output">
-                <input type="text" name="output" id="output" placeholder="">
-            </div>
-            
-
-
-            <div class="virtual-keyboard">
-                <div class="row">
-                <input type="button" value="x" id="emX">
-                <input type="button" value="b" id="emB">
-                <input type="button" value="3" id="em3">
-                <input type="button" value="0" id="em0">
-                <input type="button" value="5" id="em5">
-                <input type="button" value="i" id="emI">
-                <input type="button" value="r" id="emR">
-                <input type="button" value="t" id="emT">
-                <input type="button" value="8" id="em8">
-                <input type="button" value="n" id="emN">
-                <input type="button" value="u" id="emU">
-                
-                </div>
-                <div class="row">
-                <input type="button" value="w" id="emW">
-                <input type="button" value="e" id="emE">
-                <input type="button" value="6" id="em6">
-                <input type="button" value="7" id="em7">
-                <input type="button" value="4" id="em4">
-                <input type="button" value="y" id="emY">
-                <input type="button" value="q" id="emQ">
-                <input type="button" value="d" id="emD">
-                <input type="button" value="o" id="emO">
-                <input type="button" value="p" id="emP">
-                </div>
-                <div class="row">
-                <input type="button" value="s" id="emS">
-                <input type="button" value="delete" class="delete" id="emDelete">
-                <input type="button" value="f" id="emF">
-                <input type="button" value="v" id="emV">
-                <input type="button" value="h" id="emH">
-                <input type="button" value="a" id="emA">
-                <input type="button" value="j" id="emJ">
-                <input type="button" value=" " id="emSpace">
-                <input type="button" value="l" id="emL">
-                </div>
-                <div class="row">
-                <input type="button" value="m" id="emM">
-                <input type="button" value="1" id="em1">
-                <input type="button" value="2" id="em2">
-                <input type="button" value="g" id="emG">
-                <input type="button" value="c" id="emC">
-                <input type="button" value="9" id="em9">
-                <input type="button" value="z" id="emZ">
-                </div>
-                <div class="row spacebar">
-                    <input type="button" value="k" id="emK">         
-                </div>
-            </div><!--// virtual-keyboard -->
-        </div>
-        <div> 
-                <font color="white" style="font-size: 40px"> Time Left - </font> 
-                <font color="white" style="font-size: 40px">{{currentValue}}</font>
-        </div>
-        <div class="column">
-            <img src="assets/img/chart.jpg" height="334.5px" width="600px">
-            <br><br><br>
-            <div class="row">
-                <button type="submit" (click)="Submit()" class="button"><b>Submit</b></button>
-            </div>
-        </div> 
-    </div>  
-</body>
+      <div class="column">
+        <img src="assets/img/q5.jpeg" width="600" />
+      </div>
+      <div class="column">
+        <font color="white"
+          ><h2>Solve the simple question given in the image</h2>
+          <p>
+            Answer: <input type="text" id="answer" />
+            <button type="submit" class="button" (click)="Submit()">
+              <b>Submit</b>
+            </button>
+          </p></font>
+      </div>
+    </div>
+  </body>
 </html>
