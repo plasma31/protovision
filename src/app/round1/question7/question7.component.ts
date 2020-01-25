@@ -1,258 +1,358 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, EventEmitter, ChangeDetectorRef } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { EventService } from 'src/app/event.service';
-
+import { BestScoreManager } from '../round1.service';
+import { CONTROLS, COLORS, BOARD_SIZE, GAME_MODES } from './constants';
+import { Subscription, Observable,interval } from 'rxjs';
+import { take } from 'rxjs/operators';
 
 @Component({
   selector: 'app-question7',
   templateUrl: './question7.component.html',
-  styleUrls: ['./question7.component.css']
+  styleUrls: ['./question7.component.css'],
+  host: {
+    '(document:keydown)': 'handleKeyboardEvents($event)'
+  }
 })
+
 export class Question7Component implements OnInit {
-  constructor(private actRoute:ActivatedRoute,public eveSer:EventService,public router:Router) {}
-  currparticipant: any;
-  id:any;
+  counterState = new EventEmitter<string>();
+  currentValue = '';
+  currentSubscription: Subscription;
+  startAt :number=0 ;
+
   ngOnInit() {
-        this.load();
+    this.showMenu();
   }
-  load(){
-    this.actRoute.queryParams.subscribe(params => {
-      console.log(params);
-      this.currparticipant=params;
-      this.id=params.id;
-      console.log(this.id);
+  status="";
+  control="Analyze the Controls";
+  intervalTimer;
+  private interval: number;
+  private tempDirection: number;
+  private default_mode = 'classic';
+  private isGameOver = false;
+
+  public all_modes = GAME_MODES;
+  public getKeys = Object.keys;
+  public board = [];
+  public obstacles = [];
+  public score = 0;
+  public showMenuChecker = false;
+  public gameStarted = false;
+  public newBestScore = false;
+  public best_score = this.bestScoreService.retrieve();
+
+  private snake = {
+    direction: CONTROLS.LEFT,
+    parts: [
+      {
+        x: -1,
+        y: -1
+      }
+    ]
+  };
+
+  private fruit = {
+    x: -1,
+    y: -1
+  };
+
+  constructor(
+    private bestScoreService: BestScoreManager,private changeDetector: ChangeDetectorRef
+  ) {
+    this.setBoard();
+  }
+  startTimer() {
+    this.currentValue = this.formatValue(this.startAt);
+    this.changeDetector.detectChanges();
+  
+    const t: Observable<number> = interval(1000);
+  
+    this.currentSubscription = t.pipe(take(this.startAt)).map(v => this.startAt - (v + 1) ).subscribe(v => {
+      this.currentValue = this.formatValue(v);
+      this.changeDetector.detectChanges();
+    }, err => {
+      this.counterState.error(err);
+    }, () => {
+      this.currentValue = '00:00';
+      this.counterState.emit('COMPLETE');
+      this.changeDetector.detectChanges();
     });
-    let won;
-    var minutes;
-    var seconds;
-    var canvas = <HTMLCanvasElement>document.getElementById('game');
-    var context = canvas.getContext('2d');
-    var grid = 16;
-    var count = 0;
-    var check:boolean;
-    var snake = {
-    x: 160,
-    y: 160,
+  }
+   stop() {
+    this.currentSubscription.unsubscribe();
+    this.counterState.emit('ABORTED');
+  }
+   formatValue (v) {
+    const min = Math.floor(v / 60);
+    const formattedmin = (min > 9 ? min : '0' + min);
   
-  // snake velocity. moves one grid length every frame in either the x or y direction
-    dx: grid,
-    dy: 0,
+    const sec = v % 60;
+    const formattedsec = (sec > 9 ? sec : '0' + sec);
   
-  // keep track of all grids the snake body occupies
-    cells: [],
-  
-  // length of the snake. grows when eating an apple
-    maxCells: 4
+    return `${formattedmin}:${formattedsec}`;
+  }
+  handleKeyboardEvents(e: KeyboardEvent) {
+    // console.log(this.currentValue);
+    if(this.currentValue >= "01:30"){
+      if (e.keyCode === CONTROLS.LEFT && this.snake.direction !== CONTROLS.LEFT) {
+        this.tempDirection = CONTROLS.RIGHT;
+      } else if (e.keyCode === CONTROLS.UP && this.snake.direction !== CONTROLS.UP) {
+        this.tempDirection = CONTROLS.DOWN;
+      } else if (e.keyCode === CONTROLS.RIGHT && this.snake.direction !== CONTROLS.RIGHT) {
+        this.tempDirection = CONTROLS.LEFT;
+      } else if (e.keyCode === CONTROLS.DOWN && this.snake.direction !== CONTROLS.DOWN) {
+        this.tempDirection = CONTROLS.UP;
+      }
+    }
+    else if(this.currentValue >= "00:45"){
+      this.control="Controls Changed.";
+      if (e.keyCode === CONTROLS.LEFT && this.snake.direction !== CONTROLS.DOWN) {
+        this.tempDirection = CONTROLS.UP;
+      } else if (e.keyCode === CONTROLS.UP && this.snake.direction !== CONTROLS.LEFT) {
+        this.tempDirection = CONTROLS.RIGHT;
+      } else if (e.keyCode === CONTROLS.RIGHT && this.snake.direction !== CONTROLS.UP) {
+        this.tempDirection = CONTROLS.DOWN;
+      } else if (e.keyCode === CONTROLS.DOWN && this.snake.direction !== CONTROLS.RIGHT) {
+        this.tempDirection = CONTROLS.LEFT;
+      }
+    }
+    else if(this.currentValue >= "00:00"){
+      this.control="Controls Changed Again";
+      if (e.keyCode === CONTROLS.LEFT && this.snake.direction !== CONTROLS.UP) {
+        this.tempDirection = CONTROLS.DOWN;
+      } else if (e.keyCode === CONTROLS.UP && this.snake.direction !== CONTROLS.RIGHT) {
+        this.tempDirection = CONTROLS.LEFT;
+      } else if (e.keyCode === CONTROLS.RIGHT && this.snake.direction !== CONTROLS.DOWN) {
+        this.tempDirection = CONTROLS.UP;
+      } else if (e.keyCode === CONTROLS.DOWN && this.snake.direction !== CONTROLS.LEFT) {
+        this.tempDirection = CONTROLS.RIGHT;
+      }
+    }
+  }
+
+  setColors(col: number, row: number): string {
+    if (this.isGameOver) {
+      return COLORS.GAME_OVER;
+    } else if (this.fruit.x === row && this.fruit.y === col) {
+      return COLORS.FRUIT;
+    } else if (this.snake.parts[0].x === row && this.snake.parts[0].y === col) {
+      return COLORS.HEAD;
+    } else if (this.board[col][row] === true) {
+      return COLORS.BODY;
+    } else if (this.default_mode === 'obstacles' && this.checkObstacles(row, col)) {
+      return COLORS.OBSTACLE;
+    }
+
+    return COLORS.BOARD;
+  };
+
+  updatePositions(): void {
+    let newHead = this.repositionHead();
+    let me = this;
+
+    if (this.default_mode === 'classic' && this.boardCollision(newHead)) {
+      return this.gameOver();
+    } else if (this.default_mode === 'no_walls') {
+      this.noWallsTransition(newHead);
+    } else if (this.default_mode === 'obstacles') {
+      this.noWallsTransition(newHead);
+      if (this.obstacleCollision(newHead)) {
+        return this.gameOver();
+      }
+    }
+    if (this.score == 15) {
+      this.status="You Won!!"
+      this.stop();
+      return this.gameOver();
+    }
+    if (this.selfCollision(newHead) || this.currentValue=='00:00') {
+      this.status="You Lose!";
+      this.stop();
+      return this.gameOver();
+    } else if (this.fruitCollision(newHead)) {
+      this.eatFruit();
+    }
+
+    let oldTail = this.snake.parts.pop();
+    this.board[oldTail.y][oldTail.x] = false;
+
+    this.snake.parts.unshift(newHead);
+    this.board[newHead.y][newHead.x] = true;
+
+    this.snake.direction = this.tempDirection;
+
+    setTimeout(() => {
+      me.updatePositions();
+    }, this.interval);
+  }
+
+  repositionHead(): any {
+    let newHead = Object.assign({}, this.snake.parts[0]);
+
+    if (this.tempDirection === CONTROLS.LEFT) {
+      newHead.x -= 1;
+    } else if (this.tempDirection === CONTROLS.RIGHT) {
+      newHead.x += 1;
+    } else if (this.tempDirection === CONTROLS.UP) {
+      newHead.y -= 1;
+    } else if (this.tempDirection === CONTROLS.DOWN) {
+      newHead.y += 1;
+    }
+
+    return newHead;
+  }
+
+  noWallsTransition(part: any): void {
+    if (part.x === BOARD_SIZE) {
+      part.x = 0;
+    } else if (part.x === -1) {
+      part.x = BOARD_SIZE - 1;
+    }
+
+    if (part.y === BOARD_SIZE) {
+      part.y = 0;
+    } else if (part.y === -1) {
+      part.y = BOARD_SIZE - 1;
+    }
+  }
+
+  addObstacles(): void {
+    let x = this.randomNumber();
+    let y = this.randomNumber();
+
+    if (this.board[y][x] === true || y === 8) {
+      return this.addObstacles();
+    }
+
+    this.obstacles.push({
+      x: x,
+      y: y
+    });
+  }
+
+  checkObstacles(x, y): boolean {
+    let res = false;
+
+    this.obstacles.forEach((val) => {
+      if (val.x === x && val.y === y) {
+        res = true;
+      }
+    });
+
+    return res;
+  }
+
+  obstacleCollision(part: any): boolean {
+    return this.checkObstacles(part.x, part.y);
+  }
+
+  boardCollision(part: any): boolean {
+    return part.x === BOARD_SIZE || part.x === -1 || part.y === BOARD_SIZE || part.y === -1;
+  }
+
+  selfCollision(part: any): boolean {
+    return this.board[part.y][part.x] === true;
+  }
+
+  fruitCollision(part: any): boolean {
+    return part.x === this.fruit.x && part.y === this.fruit.y;
+  }
+
+  resetFruit(): void {
+    let x = this.randomNumber();
+    let y = this.randomNumber();
+
+    if (this.board[y][x] === true || this.checkObstacles(x, y)) {
+      return this.resetFruit();
+    }
+
+    this.fruit = {
+      x: x,
+      y: y
     };
-    var apple = {
-      x: 320,
-      y: 320
+  }
+
+  eatFruit(): void {
+    this.score++;
+
+    let tail = Object.assign({}, this.snake.parts[this.snake.parts.length - 1]);
+
+    this.snake.parts.push(tail);
+    this.resetFruit();
+
+    if (this.score % 5 === 0) {
+      this.interval -= 15;
+    }
+  }
+
+  gameOver(): void {
+    this.isGameOver = true;
+    this.gameStarted = false;
+    let me = this;
+
+    if (this.score > this.best_score) {
+      this.bestScoreService.store(this.score);
+      this.best_score = this.score;
+      this.newBestScore = true;
+    }
+
+    setTimeout(() => {
+      me.isGameOver = false;
+    }, 500);
+
+    this.setBoard();
+
+  }
+
+  randomNumber(): any {
+    return Math.floor(Math.random() * BOARD_SIZE);
+  }
+
+  setBoard(): void {
+    this.board = [];
+
+    for (let i = 0; i < BOARD_SIZE; i++) {
+      this.board[i] = [];
+      for (let j = 0; j < BOARD_SIZE; j++) {
+        this.board[i][j] = false;
+      }
+    }
+  }
+
+  showMenu(): void {
+    this.showMenuChecker = !this.showMenuChecker;
+  }
+
+  newGame(mode: string): void {
+    this.startAt=120;
+    this.startTimer();
+    this.default_mode = mode || 'classic';
+    this.showMenuChecker = false;
+    this.newBestScore = false;
+    this.gameStarted = true;
+    this.score = 0;
+    this.tempDirection = CONTROLS.LEFT;
+    this.isGameOver = false;
+    this.interval = 70;
+    this.snake = {
+      direction: CONTROLS.LEFT,
+      parts: []
     };
-// get random whole numbers in a specific range
-// @see https://stackoverflow.com/a/1527820/2124254
-    function getRandomInt(min, max) {
-      return Math.floor(Math.random() * (max - min)) + min;
-    }
-// game loop
-    function loop() {
-      countdown();
-      requestAnimationFrame(loop);
-// slow game loop to 15 fps instead of 60 (60/15 = 4)
-      if(check==false){
-        gameOver();
-        return;
-      }
-      if(snake.maxCells == 14) {
-        youwon();
-        return;
-      }
-    if (++count < 4) {
-      return;
-    }
-    count = 0;
-    context.clearRect(0,0,canvas.width,canvas.height);
-// move snake by it's velocity
-    snake.x += snake.dx;
-    snake.y += snake.dy;
-// wrap snake position horizontally on edge of screen
-    if (snake.x < 0) {
-      snake.x = canvas.width - grid;
-    }
-    else if (snake.x >= canvas.width) {
-      snake.x = 0;
-    } 
-// wrap snake position vertically on edge of screen
-    if (snake.y < 0) {
-      snake.y = canvas.height - grid;
-    }
-    else if (snake.y >= canvas.height) {
-      snake.y = 0;
-    }
-// keep track of where snake has been. front of the array is always the head
-    snake.cells.unshift({x: snake.x, y: snake.y});
-// remove cells as we move away from them
-    if (snake.cells.length > snake.maxCells) {
-      snake.cells.pop();
-    }
-// draw apple
-    context.fillStyle = 'red';
-    context.fillRect(apple.x, apple.y, grid-1, grid-1);
-// draw snake one cell at a time
-    context.fillStyle = 'green';
-    snake.cells.forEach(function(cell, index) {
-// drawing 1 px smaller than the grid creates a grid effect in the snake body so you can see how long it is
-    context.fillRect(cell.x, cell.y, grid-1, grid-1);  
-// snake ate apple
-    if (cell.x === apple.x && cell.y === apple.y) {
-      snake.maxCells++;
-// canvas is 400x400 which is 25x25 grids 
-      apple.x = getRandomInt(0, 25) * grid;
-      apple.y = getRandomInt(0, 25) * grid;
-    }
-// check collision with all cells after this one (modified bubble sort)
-    for (var i = index + 1; i < snake.cells.length; i++) {
-// snake occupies same space as a body part. reset game
-      if (cell.x === snake.cells[i].x && cell.y === snake.cells[i].y) {
-        snake.x = 160;
-        snake.y = 160;
-        snake.cells = [];
-        snake.maxCells = 4;
-        snake.dx = grid;
-        snake.dy = 0;
-        apple.x = getRandomInt(0, 25) * grid;
-        apple.y = getRandomInt(0, 25) * grid;
-      }
-    }
-  });
-}
-// listen to keyboard events to move the snake
-document.addEventListener('contextmenu',event=> event.preventDefault());
-document.addEventListener('keydown', function(e) {
-  
-// left arrow key
-  if (e.which === 37 && snake.dx === 0) {
-    snake.dx = grid;
-    snake.dy = 0;
-  }
-// up arrow key
-  else if (e.which === 38 && snake.dy === 0) {
-    snake.dy = grid;
-    snake.dx = 0;
-  }
-// right arrow key
-  else if (e.which === 39 && snake.dx === 0) {
-    snake.dx = -grid;
-    snake.dy = 0;
-  }
-// down arrow key
-  else if (e.which === 40 && snake.dy === 0) {
-    snake.dy = -grid;
-    snake.dx = 0;
-  }
-  if(e.which === 116 || e.which === 82 || e.which === 17||e.which === 16||e.which === 73||e.which === 91||e.which === 122) {
-   // e.keydown = 0;
-    e.returnValue = false;
-    return false;
-  }
-});
-// start the game
-requestAnimationFrame(loop);
-function gameOver() {
-    context.font = "20px Georgia";  
-    context.fillText("Game Over!", 10, 90);
-  }
-function cheating() {
-  context.font = "20px Georgia";  
-  context.fillText("Cheating!", 10, 60);
-  //check=false;
-}
-function youwon() {
-  context.font = "20px Georgia";  
-  context.fillText("YOU WON!!!", 10, 60);
-  won=true;
-    //check=false;
-}
 
-function timeUp() {
-  context.font = "20px Georgia";  
-  context.fillText("Time's Up!", 10, 60);
-  check = false;
-}
-//timer
-//set minutes 
-var mins = 90; 
+    for (let i = 0; i < 3; i++) {
+      this.snake.parts.push({ x: 10 + i, y: 10 });
+    }
 
-//calculate the seconds 
-var secs = mins * 60; 
-//countdown function is evoked when page is loaded 
-function countdown() { 
-    setTimeout(decrement =>{ 
-      if (document.getElementById) { 
-          minutes = document.getElementById("minutes"); 
-          seconds = document.getElementById("seconds"); 
-  
-          //if less than a minute remaining 
-          //Display only seconds value. 
-          if (seconds < 59) { 
-              seconds.value = secs; 
-          } 
-  
-          //Display both minutes and seconds 
-          //getminutes and getseconds is used to 
-          //get minutes and seconds 
-          else { 
-              minutes.value = getminutes(); 
-              seconds.value = getseconds(); 
-          } 
-          //when less than a minute remaining 
-          //colour of the minutes and seconds 
-          //changes to red 
-          if (mins < 1) { 
-              minutes.style.color = "red"; 
-              seconds.style.color = "red"; 
-          } 
-          //if seconds becomes zero, 
-          //then page alert time up 
-          if (mins < 0) { 
-              timeUp(); 
-              minutes.value = 0; 
-              seconds.value = 0; 
-          } 
-          //if seconds > 0 then seconds is decremented 
-          else { 
-              secs--; 
-              setTimeout(decrement, 1000); 
-          } 
-      } 
-  } , 60); 
-} 
+    if (mode === 'obstacles') {
+      this.obstacles = [];
+      let j = 1;
+      do {
+        this.addObstacles();
+      } while (j++ < 9);
+    }
 
-
-
-function getminutes() { 
-    //minutes is seconds divided by 60, rounded down 
-    mins = Math.floor(secs / 60); 
-    return mins; 
-  } 
-
-function getseconds() { 
-    //take minutes remaining (as seconds) away 
-    //from total seconds remaining 
-    return secs - Math.round(mins * 60); 
-  } 
- if (window.performance) {
-  console.info("window.performance works fine on this browser");
- }
-  if (performance.navigation.type == 1) {
-    //console.info( "This page is reloaded" );
-    cheating();
-    gameOver();
-    check = false;
+    this.resetFruit();
+    this.updatePositions();
   }
 }
-submit(){
-  alert("Round 1 Over");
-  this.router.navigateByUrl('/rover');
-}
-}
-
