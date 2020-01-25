@@ -17,32 +17,29 @@ const routes: Routes = [
     path: 'rules',
     component:RulesComponent
   },
+
   {
     path: 'question1',
-    component:Question1Component
-  },
-  {
-    path: 'question2',
     component:Question2Component
   },
   {
-    path: 'question3',
+    path: 'question2',
     component:Question3Component
   },
   {
-    path: 'question4',
+    path: 'question3',
     component:Question4Component
   },
   {
-    path: 'question5',
+    path: 'question4',
     component:Question5Component
   },
   {
-    path: 'question6',
+    path: 'question5',
     component:Question6Component
   },
   {
-    path: 'question7',
+    path: 'question6',
     component:Question7Component
   },
   { path: '**', redirectTo: 'question1' }

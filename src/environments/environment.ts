@@ -5,13 +5,13 @@
 export const environment = {
   production: false,
   firebase:{
-    apiKey: "AIzaSyCY7pMmolq71sF5uSdZtCrXdSuRe4j9L2M",
-    authDomain: "suigeneris-91e90.firebaseapp.com",
-    databaseURL: "https://suigeneris-91e90.firebaseio.com",
-    projectId: "suigeneris-91e90",
-    storageBucket: "suigeneris-91e90.appspot.com",
-    messagingSenderId: "942349921706",
-    appId: "1:942349921706:web:897991dea6b3a0f3"
+    apiKey: "AIzaSyCwKXO7xEDtVpD33bV7nMiuXGTu24NTgLk",
+    authDomain: "suigenerisapp.firebaseapp.com",
+    databaseURL: "https://suigenerisapp.firebaseio.com",
+    projectId: "suigenerisapp",
+    storageBucket: "suigenerisapp.appspot.com",
+    messagingSenderId: "784163068473",
+    appId: "1:784163068473:web:225caa5a015c1dd6878be8"
   }  
 };
 

@@ -1,3 +1,4 @@
+import { CONTROLS } from './../round1/question7/constants';
 import { Component, OnInit } from "@angular/core";
 import { FormGroup, FormControl, Validators } from "@angular/forms";
 import { EventService } from "../event.service";
@@ -10,23 +11,16 @@ import { NavigationExtras, Router } from "@angular/router";
 })
 export class LoginComponent implements OnInit {
   loginForm = new FormGroup({
-    firstplayer: new FormControl("", [
+    user: new FormControl("", [
       Validators.required,
       Validators.minLength(3)
     ]),
-    secondplayer: new FormControl("", [
-      Validators.required,
-      Validators.minLength(3)
-    ]),
-    email: new FormControl("", [
-      Validators.required,
-      Validators.pattern(".+@.+..+")
-    ]),
-    number: new FormControl(0, Validators.required),
+    number: new FormControl(0,Validators.required),
     score: new FormControl("")
   });
   eventForm: any;
   error: boolean;
+  currentuser:any;
   constructor(private eveSer: EventService, private router: Router) {}
   attended: any;
   ngOnInit() {
@@ -43,35 +37,47 @@ export class LoginComponent implements OnInit {
   submit() {
     let i;
     for (i = 0; i < this.attended.length; i++) {
-      console.log(this.loginForm.value.firstplayer);
-      console.log(this.loginForm.value.email);
-      console.log(this.loginForm.value.number);
-      console.log(this.attended[i].data.name);
-      console.log(this.attended[i].data.email);
-      console.log(this.attended[i].data.number);
-      if (
-        this.loginForm.value.firstplayer === this.attended[i].data.name &&
-        this.loginForm.value.email === this.attended[i].data.email &&
-        this.loginForm.value.number === this.attended[i].data.number
-      ) {
-        console.log(this.attended[i].id);
-        console.log(this.loginForm.value);
+      let user=this.attended[i].data.data;
+      this.currentuser=user;
+      console.log(this.currentuser.number);
+      if(this.currentuser.username === this.loginForm.value.user && this.currentuser.number == this.loginForm.value.number) {
         this.router.navigate(["/round1/rules"], {
-          queryParams: {
-            id: this.attended[i].id
-          }
-        });
-        var score: number = 0;
-        this.loginForm.controls["score"].setValue(score);
-        this.eveSer.setScore(this.attended[i].id, this.loginForm.value);
-        this.loginForm.reset();
-        break;
-      } else {
-        this.error = false;
+                queryParams: {
+                  id: this.attended[i].data.id
+                }
+              });
+              var score: number = 0;
+              this.loginForm.controls["score"].setValue(score);
+              console.log(this.attended[i].data.id);
+              this.eveSer.setScoreDetails(this.attended[i].data.id, this.loginForm.value).then(success=>{
+                console.log(success);
+              }).catch(error=>{console.log(error)});
+              this.loginForm.reset();
+              break;
+            } else {
+              this.error = false;
+              // break;
+            }
       }
-    }
-    if (this.error == false) {
-      alert("Invalid Details");
-    }
+      // console.log(this.currentuser);
+      // break;
+    //   if (this.loginForm.value.user === user.data.name && this.loginForm.value.number === user.data.number) {
+    //     this.router.navigate(["/round1/rules"], {
+    //       queryParams: {
+    //         id: this.attended[i].id
+    //       }
+    //     });
+    //     var score: number = 0;
+    //     this.loginForm.controls["score"].setValue(score);
+    //     this.eveSer.setScore(this.attended[i].id, this.loginForm.value);
+    //     this.loginForm.reset();
+    //     break;
+    //   } else {
+    //     this.error = false;
+    //   }
+    // }
+    // if (this.error == false) {
+    //   alert("Invalid Details");
+    // }
   }
 }

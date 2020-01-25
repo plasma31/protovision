@@ -20,8 +20,21 @@ export class Question7Component implements OnInit {
   currentValue = '';
   currentSubscription: Subscription;
   startAt :number=0 ;
-
+  protoparticipant:any;
+  id:any;
+  currparticipant: any;
   ngOnInit() {
+    this.actRoute.queryParams.subscribe(params => {
+      console.log(params);
+      let obj:any = params;
+      this.id=params.id;
+    });
+    this.eveSer.getScore().subscribe(success => {
+      this.protoparticipant = success;
+      console.log(success);
+      }, error => {
+        console.log(error);
+      });
     this.showMenu();
   }
   status="";
@@ -57,9 +70,8 @@ export class Question7Component implements OnInit {
     y: -1
   };
 
-  constructor(
-    private bestScoreService: BestScoreManager,private changeDetector: ChangeDetectorRef
-  ) {
+  constructor(private router:Router,
+    private bestScoreService: BestScoreManager,private changeDetector: ChangeDetectorRef,private eveSer:EventService,private actRoute:ActivatedRoute) {
     this.setBoard();
   }
   startTimer() {
@@ -302,7 +314,7 @@ export class Question7Component implements OnInit {
     }, 500);
 
     this.setBoard();
-
+    this.Submit();
   }
 
   randomNumber(): any {
@@ -354,5 +366,26 @@ export class Question7Component implements OnInit {
 
     this.resetFruit();
     this.updatePositions();
+  }
+  Submit(){    
+    var i;
+    for(i=0;i<this.protoparticipant.length;i++){
+      console.log(this.protoparticipant[i].id);
+      if(this.id===this.protoparticipant[i].id){
+        this.currparticipant=this.protoparticipant[i].data;
+      }
+    }
+    let obj:any={'score':0};
+       obj.score = this.score;
+      obj.score = this.currparticipant.score + obj.score;
+      console.log(obj.score);
+      this.eveSer.addScore(this.id, obj).then(success=>{
+        console.log(success);
+      }).catch(error=>{console.log(error)});
+    this.router.navigate(["/rover"], {
+      queryParams: {
+        id: this.id
+      }
+    });
   }
 }

@@ -146,27 +146,21 @@ export class Question3Component implements OnInit {
         this.currparticipant = this.protoparticipant[i].data;
       }
     }
-    let obj: any = {};
-    obj.firstplayer = this.currparticipant.firstplayer;
-    obj.secondplayer = this.currparticipant.secondplayer;
-    obj.number = this.currparticipant.number;
-    obj.email = this.currparticipant.email;
+    let obj:any={'score':0};
     if (this.check === true) {
-      let score = 5;
-      obj.score = this.currparticipant.score + score;
-      console.log(obj);
-      this.eveSer.setScore(this.id, obj);
+       obj.score = 5;
     } else {
-      let score = 0;
-      obj.score = this.currparticipant.score + score;
-      console.log(obj);
-      this.eveSer.setScore(this.id, obj);
+      obj.score = 0;
     }
-    this.router.navigate(["/round1/question4"], {
+      obj.score = this.currparticipant.score + obj.score;
+      console.log(obj.score);
+      this.eveSer.addScore(this.id, obj).then(success=>{
+        console.log(success);
+      }).catch(error=>{console.log(error)});
+    this.router.navigate(["/round1/question3"], {
       queryParams: {
         id: this.id
       }
     });
-    console.log(this.check);
   }
 }

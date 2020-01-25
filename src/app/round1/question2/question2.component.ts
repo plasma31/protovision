@@ -36,7 +36,8 @@ export class Question2Component implements OnInit {
   }
   public validate() {
     var x = (<HTMLInputElement>document.getElementById("answer")).value;
-    if (x === "voice" || x === "VOICE") {
+    console.log(typeof(x));
+    if (x.toLowerCase() == "voice") {
       this.check = true;
     } else {
       this.check = false;
@@ -47,25 +48,21 @@ export class Question2Component implements OnInit {
       console.log(this.protoparticipant[i].id);
       if (this.id === this.protoparticipant[i].id) {
         this.currparticipant = this.protoparticipant[i].data;
+        console.log(this.currparticipant);
       }
     }
-    let obj: any = {};
-    obj.firstplayer = this.currparticipant.firstplayer;
-    obj.secondplayer = this.currparticipant.secondplayer;
-    obj.number = this.currparticipant.number;
-    obj.email = this.currparticipant.email;
+    let obj:any={'score':0};
     if (this.check === true) {
-      let score = 5;
-      obj.score = this.currparticipant.score + score;
-      console.log(obj);
-      this.eveSer.setScore(this.id, obj);
+       obj.score = 5;
     } else {
-      let score = 0;
-      obj.score = this.currparticipant.score + score;
-      console.log(obj);
-      this.eveSer.setScore(this.id, obj);
+      obj.score = 0;
     }
-    this.router.navigate(["/round1/question3"], {
+      obj.score = this.currparticipant.score + obj.score;
+      console.log(obj.score);
+      this.eveSer.addScore(this.id, obj).then(success=>{
+        console.log(success);
+      }).catch(error=>{console.log(error)});
+    this.router.navigate(["/round1/question2"], {
       queryParams: {
         id: this.id
       }

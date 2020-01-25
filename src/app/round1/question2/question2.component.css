@@ -21,13 +21,13 @@ input[type=text] {
     padding: 12px 20px;
     margin: 8px 0;
     box-sizing: border-box;
-    border: 2px solid red;
+    border: 2px solid #43b74c;
     border-radius: 4px;
     background: transparent;
     color: white;
 }
 button {
-    background-color: red;
+    background-color:#288830;
     border: none;
     color: black;
     padding: 20px;
@@ -40,5 +40,5 @@ button {
     border-radius: 8px;
 }
 button:hover {
-    background-color:darkred;
+    background-color:#43b74c;
 }
