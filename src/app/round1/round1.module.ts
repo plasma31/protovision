@@ -10,6 +10,8 @@ import { Question6Component } from './question6/question6.component';
 import { Question7Component } from './question7/question7.component';
 import { Routes, RouterModule, ActivatedRoute } from '@angular/router';
 import { RulesComponent } from './rules/rules.component';
+import { BestScoreManager } from './round1.service';
+import { BrowserModule } from '@angular/platform-browser';
 const routes: Routes = [
   {
     path: 'rules',
@@ -49,10 +51,12 @@ const routes: Routes = [
   declarations: [Question1Component, Question2Component, Question3Component, Question4Component, Question5Component, Question6Component, Question7Component, RulesComponent],
   imports: [
     ReactiveFormsModule,
-    CommonModule,
     FormsModule,
+    CommonModule,
     RouterModule.forChild(routes)
 
-  ]
+  ],  providers: [
+    BestScoreManager
+  ],
 })
 export class Round1Module { }

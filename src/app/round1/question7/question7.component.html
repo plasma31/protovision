@@ -1,20 +1,25 @@
-<html>
-<head>
-  <title></title>
-  <script class='e2e-truted-url' [href]="scripjs"></script>
-</head>
-<body id="bod" style="height:750px;">
-    <div> 
-        Time Left - 
-        <input id="minutes" type="text" style="width: 20px; 
-            border: none; font-size: 16px; 
-            font-weight: bold; background: transparent; color: black;"><font size="5"> : 
-                </font> 
-        <input id="seconds" type="text" style="width: 20px; 
-            border: none; font-size: 16px; 
-            font-weight:bold; background: transparent ;color: black;"> 
+<div class="game-container">
+    <div class="game-header">
+      <h3 class="logo">Snake</h3>
+      <div class="score-block">
+        <h3 class="score" style="padding-top: 10px;" [ngClass]="{'new-best-score': newBestScore}">Score: {{score}}</h3>
+        <!-- <h3 class="best-score" [ngClass]="{'new-best-score': newBestScore}">Best Score: {{best_score}}</h3> -->
+      </div>
+      <div> 
+        <font color="white"> Time Left - </font> 
+        <font color="white">{{currentValue}}</font>  
     </div>
-<canvas width="400" height="400" id="game"></canvas>
-<button  class=".btn" type="submit" id="submit" (click)="submit()"  class="button">Submit</button>
-</body>
-</html>
+    </div>
+    <div class="row" *ngFor="let column of board; let i = index;">
+      <div class="column" [ngStyle]="{'background-color': setColors(i, j)}" *ngFor="let row of column; let j = index;"></div>
+    </div>
+    <div *ngIf="!status && control.includes('Analyze')" style="background-color: cyan; color: black;" class="start-button">{{control}}</div>
+    <div *ngIf="!status && control.includes('Changed.')" style="background-color: gold;color: black" class="start-button">{{control}}</div>
+    <div *ngIf="!status && control.includes('Changed Again')" style="background-color: salmon;color: black" class="start-button">{{control}}</div>
+    <div *ngIf="status=='You Lose!'" class="start-button lose">{{status}}</div>
+    <div *ngIf="status=='You Won!!'" class="start-button won">{{status}}</div>
+    <div class="new-game-menu" *ngIf="showMenuChecker">
+      <div style="padding-top:70px"></div>
+      <div class="start-button new-game-button" (click)="newGame('no_walls')">START GAME</div>
+    </div>
+  </div>
