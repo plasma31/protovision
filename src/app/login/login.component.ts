@@ -3,6 +3,7 @@ import { Component, OnInit } from "@angular/core";
 import { FormGroup, FormControl, Validators } from "@angular/forms";
 import { EventService } from "../event.service";
 import { NavigationExtras, Router } from "@angular/router";
+import swal from 'sweetalert';
 
 @Component({
   selector: "app-login",
@@ -41,17 +42,19 @@ export class LoginComponent implements OnInit {
       this.currentuser=user;
       console.log(this.currentuser.number);
       if(this.currentuser.username === this.loginForm.value.user && this.currentuser.number == this.loginForm.value.number) {
-        this.router.navigate(["/round1/rules"], {
-                queryParams: {
-                  id: this.attended[i].data.id
-                }
-              });
+        
               var score: number = 0;
               this.loginForm.controls["score"].setValue(score);
               console.log(this.attended[i].data.id);
               this.eveSer.setScoreDetails(this.attended[i].data.id, this.loginForm.value).then(success=>{
                 console.log(success);
               }).catch(error=>{console.log(error)});
+              swal("Login Successful");
+              this.router.navigate(["/round1/rules"], {
+                queryParams: {
+                  id: this.attended[i].data.id
+                }
+              });
               this.loginForm.reset();
               break;
             } else {

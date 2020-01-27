@@ -44,18 +44,8 @@ export class Question1Component implements OnInit {
         }, error => {
           console.log(error);
         });
-        this.keyboard();
   }
-  keyboard() {
-    // document.addEventListener('contextmenu',event=> event.preventDefault());
-    document.addEventListener('keydown', function(e) {
-      if(e.which === 116 || e.which === 17||e.which === 16||e.which === 73||e.which === 91||e.which === 122||e.which === 67||e.which === 73) {
-        // e.keydown = 0;
-         e.returnValue = false;
-         return false;
-       }
-    });
-  }
+
   validate() {
     
     var i: number;

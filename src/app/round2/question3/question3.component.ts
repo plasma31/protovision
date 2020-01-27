@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { EventService } from 'src/app/event.service';
+import swal from 'sweetalert';
 
 @Component({
   selector: 'app-question3',
@@ -59,7 +60,7 @@ export class Question3Component implements OnInit {
     // obj.number = this.currparticipant.number;
     // obj.email = this.currparticipant.email;
     if (this.check === true) {
-      alert("HINT: r b");
+      swal("HINT: r b");
       // console.log("true and navigate");
       // let score = 5;
       obj.score = 5;

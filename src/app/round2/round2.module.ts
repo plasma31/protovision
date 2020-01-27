@@ -38,7 +38,9 @@ const routes: Routes = [
   {
     path: 'gameover',
     component:GameoverComponent
-  }
+  },
+  { path: '**', redirectTo: 'login' }
+
 ]
 
 

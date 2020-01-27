@@ -14,14 +14,13 @@
             <form class="text-center" method="post" style="height: 554px;margin: 0px -200px;background-color: rgba(0,0,0,0.95);margin-left: 20px;margin-bottom: 0px;margin-top: 0px;margin-right: -192px;">
                 <h2 class="sr-only">Login Form</h2>
                 <h1 class="text-center" style="margin-left: -5px;">PROTOVISION</h1>
-                <div class="illustration" style="height: 173px;width: 240px;"><img height=150 width=150 src="../../../assets/img/user.png"></div>
+                <div class="illustration" style="height: 173px;width: 240px;"><img height=150 width=150 src="assets/img/user.png"></div>
+                <br>
                 <div class="form-group" [formGroup]="loginForm">
-                    <input class="form-control" required formControlName="firstplayer" type="text" placeholder="Registered Player Name" style="height: 42px;">
-                    <input class="form-control" required formControlName="secondplayer" type="text" placeholder="2nd Player Name" style="height: 42px;">
+                    <input class="form-control" required formControlName="user" type="text" placeholder="Username" style="height: 42px;">
                     <input class="form-control" required formControlName="number" type="tel" maxLength="10" minLength="10" placeholder="Phone no" style="height: 42px;background-color: rgba(214,198,198,0);">
-                    <input class="form-control" required formControlName="email" type="email" name="email" placeholder="Email" style="height: 42px;">
-                    <label class="text-left" style="color: rgba(22,212,238,0.88);font-size: 12px;">*Use the registered PHONE NO. and EMAIL</label>
-                    <button [disabled]="loginForm.invalid" class="btn btn-primary btn-block" type="submit" (click)="submit()" style="background-color: rgba(22,212,238,0.68);color: rgb(0,0,0);filter: brightness(99%);margin: 25px;margin-left: 3px;margin-top: 16px;">Log In</button>
+                    <label class="text-left" style="color: rgba(22,212,238,0.88);font-size: 12px;">*Use the registered phone number</label>
+                    <button [disabled]="loginForm.invalid" class="btn btn-primary btn-block" (click)="submit()" style="background-color: rgba(22,212,238,0.68);color: rgb(0,0,0);filter: brightness(99%);margin: 25px;margin-left: 3px;margin-top: 16px;">Log In</button>
                 </div>
             </form>
         </div>

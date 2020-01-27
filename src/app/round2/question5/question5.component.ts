@@ -59,7 +59,7 @@ export class Question5Component implements OnInit {
     // obj.number = this.currparticipant.number;
     // obj.email = this.currparticipant.email;
     if (this.check === true) {
-      // alert("HINT: e l");
+      // ("HINT: e l");
       // console.log("true and navigate");
       // let score = 5;
       obj.score = 5;

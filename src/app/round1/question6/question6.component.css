@@ -62,7 +62,7 @@ body {
     /* height: 350px; */
 }
 button {
-    background-color: yellow;
+    background-color: lightsalmon;
     border: none;
     color: black;
     padding: 20px;
@@ -75,7 +75,7 @@ button {
     border-radius: 8px;
 }
 button:hover{
-    background-color: darkgoldenrod;
+    background-color: lightsalmon;
 }
 
 #em1 {

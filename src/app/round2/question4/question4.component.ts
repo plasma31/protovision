@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { EventService } from 'src/app/event.service';
+import swal from 'sweetalert';
 
 @Component({
   selector: 'app-question4',
@@ -26,18 +27,8 @@ export class Question4Component implements OnInit {
       }, error => {
         console.log(error);
       });
-      this.keyboard();
   }
-  keyboard() {
-    document.addEventListener('contextmenu',event=> event.preventDefault());
-    document.addEventListener('keydown', function(e) {
-      if(e.which === 91||e.which === 122||e.which === 73||e.which === 67||e.which === 123) {
-        // e.keydown = 0;
-         e.returnValue = false;
-         return false;
-       }
-    });
-  }
+
   validate() {
     var x = (<HTMLInputElement>document.getElementById("answer")).value;
     if (x.toLowerCase() === "queue") {
@@ -59,7 +50,7 @@ export class Question4Component implements OnInit {
     // obj.number = this.currparticipant.number;
     // obj.email = this.currparticipant.email;
     if (this.check === true) {
-      alert("HINT: W");
+      swal("HINT: W");
       // console.log("true and navigate");
       // let score = 5;
       obj.score = 5;
