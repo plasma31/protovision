@@ -20,7 +20,7 @@ export class RulesComponent implements OnInit {
     }
   }
   Submit() {
-    this.router.navigate(["/round1/question2"], {
+    this.router.navigate(["/round1/question1"], {
       queryParams: {
         id: this.id
       }

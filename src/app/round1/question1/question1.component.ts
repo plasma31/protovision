@@ -87,12 +87,12 @@ export class Question1Component implements OnInit {
       let score=5;
       obj.score=this.currparticipant.score+score;
       console.log(obj);
-      this.eveSer.setScore(this.id,obj);
+      this.eveSer.addScore(this.id,obj);
     }else{
       let score=0;
       obj.score=this.currparticipant.score+score;
       console.log(obj);
-      this.eveSer.setScore(this.id,obj);    
+      this.eveSer.addScore(this.id,obj);    
     }
     this.router.navigate(['/round1/question2'],{
       queryParams:{

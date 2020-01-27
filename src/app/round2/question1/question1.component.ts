@@ -32,54 +32,63 @@ export class Question1Component implements OnInit {
         console.log(error);
       }
     );
-    this.keyboard();
+    // this.keyboard();
   }
-  keyboard() {
-    document.addEventListener("contextmenu", event => event.preventDefault());
-    document.addEventListener("keydown", function(e) {
-      if (
-        e.which === 91 ||
-        e.which === 122 ||
-        e.which === 73 ||
-        e.which === 67 ||
-        e.which === 123
-      ) {
-        // e.keydown = 0;
-        e.returnValue = false;
-        return false;
-      }
-    });
-  }
-  submit(c) {
-    this.check = c;
+  // keyboard() {
+  //   document.addEventListener("contextmenu", event => event.preventDefault());
+  //   document.addEventListener("keydown", function(e) {
+  //     if (
+  //       e.which === 91 ||
+  //       e.which === 122 ||
+  //       e.which === 73 ||
+  //       e.which === 67 ||
+  //       e.which === 123
+  //     ) {
+  //       // e.keydown = 0;
+  //       e.returnValue = false;
+  //       return false;
+  //     }
+  //   });
+  // }
+  validate(c) {
+    // var x = (<HTMLInputElement>document.getElementById("answer")).value;
+    if (c) {
+      this.check = true;
+    } else {
+      this.check = false;
+    }
+    // console.log(this.check);
     var i;
     for (i = 0; i < this.protoparticipant.length; i++) {
-      console.log(this.protoparticipant[i].id);
+      // console.log(this.protoparticipant[i].id);
       if (this.id === this.protoparticipant[i].id) {
         this.currparticipant = this.protoparticipant[i].data;
       }
     }
-    console.log(this.currparticipant);
-    let obj: any = {};
-    obj.firstplayer = this.currparticipant.firstplayer;
-    obj.secondplayer = this.currparticipant.secondplayer;
-    obj.number = this.currparticipant.number;
-    obj.email = this.currparticipant.email;
+    let obj: any = {'score':0};
+    // obj.firstplayer = this.currparticipant.firstplayer;
+    // obj.secondplayer = this.currparticipant.secondplayer;
+    // obj.number = this.currparticipant.number;
+    // obj.email = this.currparticipant.email;
     if (this.check === true) {
-      alert("HINT: d f");
-      console.log("true and navigate");
-      let score = 5;
-      obj.score = this.currparticipant.score + score;
-      console.log(obj);
-      this.eveSer.setScore(this.id, obj);
+      alert("HINT: d g");
+      // console.log("true and navigate");
+      // let score = 5;
+      obj.score = 5;
+      // console.log(obj);
+      // this.eveSer.addScore(this.id, obj);
     } else {
-      console.log("false and error");
-      let score = 0;
-      obj.score = this.currparticipant.score + score;
-      console.log(obj);
-      // this.eveSer.setScore(this.id,obj);
+      // console.log("fasle and error");
+      // let score = 0;
+      obj.score = 0;
+      // console.log(obj);
+      // this.eveSer.addScore(this.id, obj);
     }
-
+    obj.score = this.currparticipant.score + obj.score;
+    console.log(obj.score);
+    this.eveSer.addScore(this.id, obj).then(success=>{
+      console.log(success);
+    }).catch(error=>{console.log(error)});
     this.router.navigate(["/round2/question2"], {
       queryParams: {
         id: this.id

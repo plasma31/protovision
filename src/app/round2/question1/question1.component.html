@@ -8,11 +8,18 @@
 		}
 	</style>
 </head>
-<body style="background: black;">
-	<p style="float: right; padding-right: 40px; color: white; padding-top: 250px;"><b>Guess the bird which gives us food when it is alive and even after when it's dead.</b><br><b>Solve the above riddle and find the word in the given map and click on it.</b></p>
-	<map name="img1">
-		<area shape="rect" coords="430,289,453,300" (click)="submit(true)">
-	</map>
-<img src="assets/img/Question.png" usemap="#img1" height=700 width=700>
+<body style="background: black; height: 1200px;">
+	<div class="row">
+		<br>
+		<p style="text-align: center; color: rgb(255, 11, 11); font-size: 30px;"><b>Solve the riddle.and find that word in the map given below and click on it.</b></p>
+			<img src="assets/img/r2q1.jpg" style="width: 450px; height: 300px; padding-left: 425px; ">
+			<!-- <br> -->
+			<!-- <img src="assets/img/Question.png" usemap="#img1" style="width: 1200px; padding-left: 50px; padding-top: 30px;"> -->
+			
+	        <map name="question">
+				<area shape="rect" coords="441,133,466,144" alt="hello" (click)=validate(true)>
+			</map>
+			<img src="assets/img/Question.png" alt="hello" usemap="#question" style="margin-left:90px; margin-top: 30px;">
+	</div>
 </body>
 </html>
