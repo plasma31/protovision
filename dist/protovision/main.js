@@ -70,7 +70,7 @@ const routes = [
     },
     {
         path: '',
-        redirectTo: 'login',
+        redirectTo: 'round2',
         pathMatch: 'full'
     },
     {

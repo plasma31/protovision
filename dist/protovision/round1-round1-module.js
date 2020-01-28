@@ -10977,25 +10977,27 @@ let Question3Component = class Question3Component {
                 this.submit();
             }
         });
-        this.keyboard();
+        // this.keyboard();
     }
-    keyboard() {
-        document.addEventListener("contextmenu", event => event.preventDefault());
-        document.addEventListener("keydown", function (e) {
-            if (e.which === 116 ||
-                e.which === 17 ||
-                e.which === 16 ||
-                e.which === 91 ||
-                e.which === 122 ||
-                e.which === 82 ||
-                e.which === 73 ||
-                e.which === 67) {
-                // e.keydown = 0;
-                e.returnValue = false;
-                return false;
-            }
-        });
-    }
+    // keyboard() {
+    //   document.addEventListener("contextmenu", event => event.preventDefault());
+    //   document.addEventListener("keydown", function(e) {
+    //     if (
+    //       e.which === 116 ||
+    //       e.which === 17 ||
+    //       e.which === 16 ||
+    //       e.which === 91 ||
+    //       e.which === 122 ||
+    //       e.which === 82 ||
+    //       e.which === 73 ||
+    //       e.which === 67
+    //     ) {
+    //       // e.keydown = 0;
+    //       e.returnValue = false;
+    //       return false;
+    //     }
+    //   });
+    // }
     startTimer() {
         console.log(this.startAt);
         this.currentValue = this.formatValue(this.startAt);
@@ -11272,7 +11274,7 @@ Question4Component = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "* {\r\n    box-sizing: border-box;\r\n}\r\n\r\n/* Create two equal columns that floats next to each other */\r\n\r\n.column {\r\n    float: left;\r\n    height: 100%;\r\n    padding: 100px;\r\n}\r\n\r\n/* Clear floats after the columns */\r\n\r\n.row:after {\r\n    content: \"\";\r\n    display: table;\r\n    clear: both;\r\n}\r\n\r\ninput[type=text] {\r\n    width: 100%;\r\n    padding: 12px 20px;\r\n    margin: 8px 0;\r\n    box-sizing: border-box;\r\n    border: 2px solid #a7b1a9;\r\n    border-radius: 4px;\r\n    background: transparent;\r\n    color: white;\r\n}\r\n\r\nbutton {\r\n    background-color: #a7b1a9;\r\n    border: none;\r\n    color: black;\r\n    padding: 20px;\r\n    text-align: center;\r\n    text-decoration: none;\r\n    display: inline-block;\r\n    font-size: 16px;\r\n    margin: 4px 2px;\r\n    cursor: pointer;\r\n    border-radius: 8px;\r\n}\r\n\r\nbutton:hover {\r\n    background-color:white;\r\n}\r\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvcm91bmQxL3F1ZXN0aW9uNS9xdWVzdGlvbjUuY29tcG9uZW50LmNzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtJQUNJLHNCQUFzQjtBQUMxQjs7QUFFQSw0REFBNEQ7O0FBQzVEO0lBQ0ksV0FBVztJQUNYLFlBQVk7SUFDWixjQUFjO0FBQ2xCOztBQUVBLG1DQUFtQzs7QUFDbkM7SUFDSSxXQUFXO0lBQ1gsY0FBYztJQUNkLFdBQVc7QUFDZjs7QUFDQTtJQUNJLFdBQVc7SUFDWCxrQkFBa0I7SUFDbEIsYUFBYTtJQUNiLHNCQUFzQjtJQUN0Qix5QkFBeUI7SUFDekIsa0JBQWtCO0lBQ2xCLHVCQUF1QjtJQUN2QixZQUFZO0FBQ2hCOztBQUNBO0lBQ0kseUJBQXlCO0lBQ3pCLFlBQVk7SUFDWixZQUFZO0lBQ1osYUFBYTtJQUNiLGtCQUFrQjtJQUNsQixxQkFBcUI7SUFDckIscUJBQXFCO0lBQ3JCLGVBQWU7SUFDZixlQUFlO0lBQ2YsZUFBZTtJQUNmLGtCQUFrQjtBQUN0Qjs7QUFDQTtJQUNJLHNCQUFzQjtBQUMxQiIsImZpbGUiOiJzcmMvYXBwL3JvdW5kMS9xdWVzdGlvbjUvcXVlc3Rpb241LmNvbXBvbmVudC5jc3MiLCJzb3VyY2VzQ29udGVudCI6WyIqIHtcclxuICAgIGJveC1zaXppbmc6IGJvcmRlci1ib3g7XHJcbn1cclxuXHJcbi8qIENyZWF0ZSB0d28gZXF1YWwgY29sdW1ucyB0aGF0IGZsb2F0cyBuZXh0IHRvIGVhY2ggb3RoZXIgKi9cclxuLmNvbHVtbiB7XHJcbiAgICBmbG9hdDogbGVmdDtcclxuICAgIGhlaWdodDogMTAwJTtcclxuICAgIHBhZGRpbmc6IDEwMHB4O1xyXG59XHJcblxyXG4vKiBDbGVhciBmbG9hdHMgYWZ0ZXIgdGhlIGNvbHVtbnMgKi9cclxuLnJvdzphZnRlciB7XHJcbiAgICBjb250ZW50OiBcIlwiO1xyXG4gICAgZGlzcGxheTogdGFibGU7XHJcbiAgICBjbGVhcjogYm90aDtcclxufVxyXG5pbnB1dFt0eXBlPXRleHRdIHtcclxuICAgIHdpZHRoOiAxMDAlO1xyXG4gICAgcGFkZGluZzogMTJweCAyMHB4O1xyXG4gICAgbWFyZ2luOiA4cHggMDtcclxuICAgIGJveC1zaXppbmc6IGJvcmRlci1ib3g7XHJcbiAgICBib3JkZXI6IDJweCBzb2xpZCAjYTdiMWE5O1xyXG4gICAgYm9yZGVyLXJhZGl1czogNHB4O1xyXG4gICAgYmFja2dyb3VuZDogdHJhbnNwYXJlbnQ7XHJcbiAgICBjb2xvcjogd2hpdGU7XHJcbn1cclxuYnV0dG9uIHtcclxuICAgIGJhY2tncm91bmQtY29sb3I6ICNhN2IxYTk7XHJcbiAgICBib3JkZXI6IG5vbmU7XHJcbiAgICBjb2xvcjogYmxhY2s7XHJcbiAgICBwYWRkaW5nOiAyMHB4O1xyXG4gICAgdGV4dC1hbGlnbjogY2VudGVyO1xyXG4gICAgdGV4dC1kZWNvcmF0aW9uOiBub25lO1xyXG4gICAgZGlzcGxheTogaW5saW5lLWJsb2NrO1xyXG4gICAgZm9udC1zaXplOiAxNnB4O1xyXG4gICAgbWFyZ2luOiA0cHggMnB4O1xyXG4gICAgY3Vyc29yOiBwb2ludGVyO1xyXG4gICAgYm9yZGVyLXJhZGl1czogOHB4O1xyXG59XHJcbmJ1dHRvbjpob3ZlciB7XHJcbiAgICBiYWNrZ3JvdW5kLWNvbG9yOndoaXRlO1xyXG59Il19 */"
+module.exports = "* {\r\n    box-sizing: border-box;\r\n}\r\n\r\n/* Create two equal columns that floats next to each other */\r\n\r\n.column {\r\n    float: left;\r\n    height: 100%;\r\n    padding: 100px;\r\n}\r\n\r\n/* Clear floats after the columns */\r\n\r\n.row:after {\r\n    content: \"\";\r\n    display: table;\r\n    clear: both;\r\n}\r\n\r\ninput[type=text] {\r\n    width: 100%;\r\n    padding: 11px 15px;\r\n    margin: 7px 0;\r\n    box-sizing: border-box;\r\n    border: 2px solid #a7b1a9;\r\n    border-radius: 4px;\r\n    background: transparent;\r\n    color: white;\r\n}\r\n\r\nbutton {\r\n    background-color: #a7b1a9;\r\n    border: none;\r\n    color: black;\r\n    padding: 20px;\r\n    text-align: center;\r\n    text-decoration: none;\r\n    display: inline-block;\r\n    font-size: 16px;\r\n    margin: 4px 2px;\r\n    cursor: pointer;\r\n    border-radius: 8px;\r\n}\r\n\r\nbutton:hover {\r\n    background-color:white;\r\n}\r\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvcm91bmQxL3F1ZXN0aW9uNS9xdWVzdGlvbjUuY29tcG9uZW50LmNzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtJQUNJLHNCQUFzQjtBQUMxQjs7QUFFQSw0REFBNEQ7O0FBQzVEO0lBQ0ksV0FBVztJQUNYLFlBQVk7SUFDWixjQUFjO0FBQ2xCOztBQUVBLG1DQUFtQzs7QUFDbkM7SUFDSSxXQUFXO0lBQ1gsY0FBYztJQUNkLFdBQVc7QUFDZjs7QUFDQTtJQUNJLFdBQVc7SUFDWCxrQkFBa0I7SUFDbEIsYUFBYTtJQUNiLHNCQUFzQjtJQUN0Qix5QkFBeUI7SUFDekIsa0JBQWtCO0lBQ2xCLHVCQUF1QjtJQUN2QixZQUFZO0FBQ2hCOztBQUNBO0lBQ0kseUJBQXlCO0lBQ3pCLFlBQVk7SUFDWixZQUFZO0lBQ1osYUFBYTtJQUNiLGtCQUFrQjtJQUNsQixxQkFBcUI7SUFDckIscUJBQXFCO0lBQ3JCLGVBQWU7SUFDZixlQUFlO0lBQ2YsZUFBZTtJQUNmLGtCQUFrQjtBQUN0Qjs7QUFDQTtJQUNJLHNCQUFzQjtBQUMxQiIsImZpbGUiOiJzcmMvYXBwL3JvdW5kMS9xdWVzdGlvbjUvcXVlc3Rpb241LmNvbXBvbmVudC5jc3MiLCJzb3VyY2VzQ29udGVudCI6WyIqIHtcclxuICAgIGJveC1zaXppbmc6IGJvcmRlci1ib3g7XHJcbn1cclxuXHJcbi8qIENyZWF0ZSB0d28gZXF1YWwgY29sdW1ucyB0aGF0IGZsb2F0cyBuZXh0IHRvIGVhY2ggb3RoZXIgKi9cclxuLmNvbHVtbiB7XHJcbiAgICBmbG9hdDogbGVmdDtcclxuICAgIGhlaWdodDogMTAwJTtcclxuICAgIHBhZGRpbmc6IDEwMHB4O1xyXG59XHJcblxyXG4vKiBDbGVhciBmbG9hdHMgYWZ0ZXIgdGhlIGNvbHVtbnMgKi9cclxuLnJvdzphZnRlciB7XHJcbiAgICBjb250ZW50OiBcIlwiO1xyXG4gICAgZGlzcGxheTogdGFibGU7XHJcbiAgICBjbGVhcjogYm90aDtcclxufVxyXG5pbnB1dFt0eXBlPXRleHRdIHtcclxuICAgIHdpZHRoOiAxMDAlO1xyXG4gICAgcGFkZGluZzogMTFweCAxNXB4O1xyXG4gICAgbWFyZ2luOiA3cHggMDtcclxuICAgIGJveC1zaXppbmc6IGJvcmRlci1ib3g7XHJcbiAgICBib3JkZXI6IDJweCBzb2xpZCAjYTdiMWE5O1xyXG4gICAgYm9yZGVyLXJhZGl1czogNHB4O1xyXG4gICAgYmFja2dyb3VuZDogdHJhbnNwYXJlbnQ7XHJcbiAgICBjb2xvcjogd2hpdGU7XHJcbn1cclxuYnV0dG9uIHtcclxuICAgIGJhY2tncm91bmQtY29sb3I6ICNhN2IxYTk7XHJcbiAgICBib3JkZXI6IG5vbmU7XHJcbiAgICBjb2xvcjogYmxhY2s7XHJcbiAgICBwYWRkaW5nOiAyMHB4O1xyXG4gICAgdGV4dC1hbGlnbjogY2VudGVyO1xyXG4gICAgdGV4dC1kZWNvcmF0aW9uOiBub25lO1xyXG4gICAgZGlzcGxheTogaW5saW5lLWJsb2NrO1xyXG4gICAgZm9udC1zaXplOiAxNnB4O1xyXG4gICAgbWFyZ2luOiA0cHggMnB4O1xyXG4gICAgY3Vyc29yOiBwb2ludGVyO1xyXG4gICAgYm9yZGVyLXJhZGl1czogOHB4O1xyXG59XHJcbmJ1dHRvbjpob3ZlciB7XHJcbiAgICBiYWNrZ3JvdW5kLWNvbG9yOndoaXRlO1xyXG59Il19 */"
 
 /***/ }),
 
@@ -11283,7 +11285,7 @@ module.exports = "* {\r\n    box-sizing: border-box;\r\n}\r\n\r\n/* Create two e
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<!DOCTYPE html>\r\n<html>\r\n  <body style=\"background-color:#0b1c12; height: 730px;\">\r\n    <div class=\"row\">\r\n      <div class=\"column\">\r\n        <img src=\"assets/img/q5.jpeg\" width=\"600\" />\r\n      </div>\r\n      <div class=\"column\">\r\n        <font color=\"white\"\r\n          ><h2>Solve the simple question given in the image</h2>\r\n          <p>\r\n            Answer: <input type=\"text\" id=\"answer\" />\r\n            <button type=\"submit\" class=\"button\" (click)=\"Submit()\">\r\n              <b>Submit</b>\r\n            </button>\r\n          </p></font>\r\n      </div>\r\n    </div>\r\n  </body>\r\n</html>\r\n"
+module.exports = "<!DOCTYPE html>\r\n<html>\r\n  <body style=\"background-color:#0b1c12; height: 730px;\">\r\n    <div class=\"row\">\r\n      <div class=\"column\">\r\n        <img src=\"assets/img/q5.jpeg\" width=\"500\" />\r\n      </div>\r\n      <div class=\"column\">\r\n        <font color=\"white\"\r\n          ><h2>Solve the question</h2>\r\n          <p>\r\n            Answer: <input type=\"text\" id=\"answer\" />\r\n            <button type=\"submit\" class=\"button\" (click)=\"Submit()\">\r\n              <b>Submit</b>\r\n            </button>\r\n          </p></font>\r\n      </div>\r\n    </div>\r\n  </body>\r\n</html>\r\n"
 
 /***/ }),
 

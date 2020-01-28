@@ -61,27 +61,27 @@ export class Question3Component implements OnInit {
         this.submit();
       }
     });
-    this.keyboard();
+    // this.keyboard();
   }
-  keyboard() {
-    document.addEventListener("contextmenu", event => event.preventDefault());
-    document.addEventListener("keydown", function(e) {
-      if (
-        e.which === 116 ||
-        e.which === 17 ||
-        e.which === 16 ||
-        e.which === 91 ||
-        e.which === 122 ||
-        e.which === 82 ||
-        e.which === 73 ||
-        e.which === 67
-      ) {
-        // e.keydown = 0;
-        e.returnValue = false;
-        return false;
-      }
-    });
-  }
+  // keyboard() {
+  //   document.addEventListener("contextmenu", event => event.preventDefault());
+  //   document.addEventListener("keydown", function(e) {
+  //     if (
+  //       e.which === 116 ||
+  //       e.which === 17 ||
+  //       e.which === 16 ||
+  //       e.which === 91 ||
+  //       e.which === 122 ||
+  //       e.which === 82 ||
+  //       e.which === 73 ||
+  //       e.which === 67
+  //     ) {
+  //       // e.keydown = 0;
+  //       e.returnValue = false;
+  //       return false;
+  //     }
+  //   });
+  // }
   startTimer() {
     console.log(this.startAt);
     this.currentValue = this.formatValue(this.startAt);
